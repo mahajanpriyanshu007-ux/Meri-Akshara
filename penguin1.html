@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>10 Days Until Akshara jI  — From PRIYANSHU 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Refined color palette: softer, more elegant pastels */
+      --bg1: linear-gradient(135deg, #fce4ec 0%, #f0f4ff 50%, #e0f2f7 100%);
+      --accent: #e91e63; /* A deeper, richer rose/pink */
+      --secondary-accent: #ffb74d;
+      --muted: #757575;
+      --card: rgba(255,255,255,0.95);
+      --envelope-color: #fce4ec; /* Light pink/cream for envelope */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;
+      font-family:'Poppins', sans-serif;}
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--bg1);
+      overflow:hidden;
+      perspective: 1000px; /* For 3D rotation effects */
+    }
+
+    /* --- ENVELOPE STYLES --- */
+    .envelope{
+      width:min(400px, 90%);
+      height: 300px;
+      background: var(--envelope-color);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1.5s, opacity 1s; /* Animation for opening */
+      z-index: 10;
+    }
+    
+    /* Initially hidden content */
+    .content-box{
+      display: none;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.5s;
+    }
+
+    /* Message and button on the face of the envelope */
+    .envelope-face {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .envelope-face h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    /* Envelope opening animation class */
+    .opened {
+        transform: rotateX(180deg) scale(0.8); /* Flips the envelope */
+        opacity: 0;
+    }
+
+    /* The final revealed content box */
+    .wrap{
+      width:min(940px,94%);
+      background:var(--card);
+      border-radius:28px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.1), 0 0 10px rgba(0,0,0,0.05);
+      padding:40px;
+      position: absolute; /* Place behind the envelope initially */
+      overflow:hidden;
+      text-align:center;
+      backdrop-filter: blur(8px);
+      z-index: 5;
+      opacity: 0;
+      transition: opacity 1s 1s; /* Delay fade in until envelope moves */
+      transform: scale(0.9);
+    }
+    .wrap.visible {
+        opacity: 1;
+        transform: scale(1);
+    }
+    /* END ENVELOPE STYLES */
+
+    /* Remaining Countdown Styles (Kept as before) */
+    header{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:12px;
+    }
+
+    .avatar{
+      width:100px;height:100px;border-radius:28px;
+      background:linear-gradient(180deg,#ffffff 0%, #ffeaf1 100%);
+      display:flex;align-items:center;justify-content:center;
+      font-size:48px;
+      box-shadow:0 8px 20px rgba(233, 30, 99, 0.2);
+      border:4px solid rgba(255,255,255,0.8);
+      transition: transform 0.3s ease;
+    }
+    .avatar:hover { transform: scale(1.05); }
+
+    h1{
+      font-family: 'Playfair Display', serif;
+      font-size:32px;margin:0;color:#333;
+      letter-spacing:0.5px;
+      line-height: 1.1;
+    }
+    p.sub{
+      margin:4px 0 24px;color:var(--muted);font-size:15px;
+    }
+
+    .countdown{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      margin:20px 0 24px;
+      flex-wrap:wrap;
+    }
+
+    .tile{
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250, 250, 250, 0.85));
+      padding:16px 12px;
+      border-radius:16px;
+      flex: 1 1 auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .num{
+      font-size:36px;font-weight:700;color:#222;
+      transition: transform 0.1s;
+    }
+    .label{
+      font-size:13px;color:var(--muted);margin-top:4px;
+      text-transform:uppercase;letter-spacing:1px;
+    }
+
+    .message{
+      margin-top:16px;
+      font-size:17px;color:#4a2a46;
+      line-height:1.4;
+    }
+
+    .fromline{
+      margin-top:20px;color:var(--accent);font-weight:600;
+      display:flex;gap:12px;align-items:center;justify-content:center;
+      font-size:18px;
+    }
+
+    .heart{
+      display:inline-block;font-size:24px;transform-origin:center;
+      animation:beat 1s infinite;
+      color:var(--accent);
+    }
+    @keyframes beat{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.15)}
+    }
+
+    .btns{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      padding:12px 16px;border-radius:14px;border:none;cursor:pointer;
+      font-weight:600;font-size:14px;
+      transition: all 0.2s ease;
+    }
+    .btn.primary{
+      background:linear-gradient(90deg, #ff4081, var(--accent));
+      color:white;
+      box-shadow: 0 10px 25px rgba(233, 30, 99, 0.3);
+    }
+    .btn.primary:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(233, 30, 99, 0.4);
+    }
+    .btn:not(.primary){
+      background:transparent;
+      color:var(--accent);
+      border:2px solid rgba(233, 30, 99, 0.2);
+    }
+    .btn:not(.primary):hover{
+      background:rgba(233, 30, 99, 0.05);
+      border-color:var(--accent);
+    }
+
+    .note{font-size:12px;color:var(--muted);margin-top:18px;opacity:0.8;}
+
+    .floater{
+      position:absolute;
+      animation: floatUp 15s infinite ease-in-out alternate;
+      z-index:-1;
+      opacity:0.4;
+      pointer-events:none;
+    }
+    .floater:nth-child(2n) { animation-delay: -7s; }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+      100% { transform: translateY(-100vh) rotate(5deg); opacity: 0.8; }
+    }
+
+    canvas#confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+
+    /* --- MOBILE OPTIMIZATION (adjusted for envelope) --- */
+    @media (max-width: 600px) {
+      .wrap {
+        padding: 24px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      }
+      .envelope {
+        width: 90%;
+        height: 250px;
+      }
+      header {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      
+      .avatar {
+        width: 80px; height: 80px;
+        font-size: 38px;
+        border-radius: 20px;
+      }
+      
+      h1 {
+        font-size: 26px;
+      }
+      
+      p.sub {
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+      
+      .countdown {
+        gap: 8px;
+        margin: 10px 0 16px;
+      }
+      
+      .tile {
+        padding: 12px 6px;
+        border-radius: 12px;
+      }
+      
+      .num {
+        font-size: 28px;
+      }
+      
+      .label {
+        font-size: 10px;
+      }
+      
+      .message {
+        font-size: 15px;
+      }
+
+      .btns {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  
+  <div class="envelope" id="envelope"> 
+    <div class="envelope-face">
+        <h2>I love you meri Penguin 🐧🌸</h2>
+        <p style="color:#757575; font-size: 14px; margin-bottom: 20px;">From your Doggy 🐶</p>
+        <button class="btn primary" id="openButton" style="width: 180px; font-size: 16px;">Open Envelope ✨</button>
+    </div>
+  </div>
+
+  <div class="wrap" role="main" aria-live="polite" id="countdownWrap">
+    <header>
+      <div class="avatar" aria-hidden="true">🐧🌸</div>
+      <div>
+        <h1>Akshara baby — my <span style="color:var(--accent)">Penguin </span></h1>
+        <p class="sub">Counting down to your Birthday meri Guggu — with all the love from Buggu 💌</p>
+      </div>
+    </header>
+
+    <div class="countdown" id="countdown" aria-hidden="false">
+      <div class="tile"><div class="num" id="days">10</div><div class="label">Days</div></div>
+      <div class="tile"><div class="num" id="hours">00</div><div class="label">Hours</div></div>
+      <div class="tile"><div class="num" id="minutes">00</div><div class="label">Minutes</div></div>
+      <div class="tile"><div class="num" id="seconds">00</div><div class="label">Seconds</div></div>
+    </div>
+
+    <div class="message" id="message">
+      Days until I get to celebrate you, Mera Bacha. Every day I love you more. ❤️
+    </div>
+
+    <div class="fromline">
+      <div style="font-style:italic;">— Priyanshu</div>
+      <div class="heart" role="img" aria-label="beating heart">💖</div>
+    </div>
+
+    <div class="btns">
+      <button class="btn primary" id="copyLink">Copy this page (share)</button>
+    </div>
+
+  </div>
+
+  <script>
+    // Envelope Opening Logic
+    document.getElementById('openButton').addEventListener('click', function() {
+        const envelope = document.getElementById('envelope');
+        const countdownWrap = document.getElementById('countdownWrap');
+        
+        // 1. Start the visual flip/fade animation on the envelope
+        envelope.classList.add('opened');
+        
+        // 2. After a delay (to match the CSS transition) reveal the content
+        setTimeout(() => {
+            // Hide the envelope completely
+            envelope.style.display = 'none';
+            
+            // Show the countdown wrap with its fade-in animation
+            countdownWrap.classList.add('visible');
+            
+            // Start confetti burst for extra fanfare
+            spawnBurst(100);
+            
+            // Start the timer update loop after the page is revealed
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            
+        }, 1200); // Wait slightly less than the 1.5s transition
+    });
+
+    // ----- TARGET: 10 days from time page loads (at midnight of that final day) -----
+    function getTargetDatePlusDays(days){
+      const now = new Date();
+      const target = new Date(now);
+      target.setDate(now.getDate() + days);
+      target.setHours(0,0,0,0);
+      return target;
+    }
+
+    const TARGET = getTargetDatePlusDays(10);
+
+    // Elements
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
+    const messageEl = document.getElementById('message');
+
+    function pad(n){return String(n).padStart(2,'0')}
+
+    function pulse(el) {
+      el.style.transform = 'scale(1.1)';
+      setTimeout(() => el.style.transform = 'scale(1)', 100);
+    }
+
+    let lastSeconds = -1;
+    let timerInterval; // Define globally, but don't start immediately
+
+    function updateTimer(){
+      const now = new Date();
+      let diff = TARGET - now;
+      if (diff <= 0){
+        // Birthday moment
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        messageEl.innerHTML = "<strong>Happy Birthday, Aksharaby — my Penguin Lily! 🎉</strong><br>Love you forever — Your Doggy 🐶❤️";
+        startBigConfetti();
+        if (timerInterval) clearInterval(timerInterval);
+        return;
+      }
+      const s = Math.floor(diff/1000);
+      const days = Math.floor(s / (24*3600));
+      const hours = Math.floor((s % (24*3600)) / 3600);
+      const mins = Math.floor((s % 3600) / 60);
+      const secs = s % 60;
+
+      // Apply pulse animation
+      if (secs !== lastSeconds) {
+        pulse(secondsEl);
+        lastSeconds = secs;
+      }
+      if (minutesEl.textContent !== pad(mins)) pulse(minutesEl);
+      if (hoursEl.textContent !== pad(hours)) pulse(hoursEl);
+      if (daysEl.textContent !== String(days).padStart(2,'0')) pulse(daysEl);
+      
+      daysEl.textContent = String(days).padStart(2,'0');
+      hoursEl.textContent = pad(hours);
+      minutesEl.textContent = pad(mins);
+      secondsEl.textContent = pad(secs);
+
+      // change small message as we get closer
+      if (days < 1){
+        messageEl.innerHTML = "Almost here, Penguin Lily... **less than 24 hours left!** Can't wait to celebrate you! 🥂";
+      } else {
+        messageEl.textContent = `Only ${days} day${days>1?'s':''} left until your special day, my Penguin Lily. Counting every heartbeat.`;
+      }
+    }
+    
+    // Initial display of the countdown numbers (before opening the envelope)
+    // This is necessary so the JS can calculate the starting time when the page loads.
+    updateTimer(); 
+
+    // ----- Confetti (lightweight canvas) -----
+    const confettiCanvas = document.getElementById('confetti');
+    const ctx = confettiCanvas.getContext('2d');
+    function resizeCanvas(){ confettiCanvas.width = innerWidth; confettiCanvas.height = innerHeight; }
+    addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    let confettiPieces = [];
+    function makePiece(x,y){
+      return {
+        x:x, y:y,
+        vx:(Math.random()-0.5)*6,
+        vy:(Math.random()*-6)-4,
+        size: 8 + Math.random()*12,
+        rot: Math.random()*360,
+        rotSpeed: (Math.random()-0.5)*12,
+        life: 200 + Math.random()*150,
+        // Confetti colors match the theme
+        color: ['#ff4081','#ffc6e6','#ffb74d','#f0f4ff','#e91e63'][Math.floor(Math.random()*5)]
+      };
+    }
+
+    function spawnBurst(count, atCenter=true){
+      const burstX = atCenter ? innerWidth/2 + (Math.random()-0.5)*200 : innerWidth * Math.random();
+      const burstY = atCenter ? innerHeight/3 + (Math.random()-0.5)*80 : innerHeight * 0.8;
+      for(let i=0;i<count;i++){
+        confettiPieces.push(makePiece(burstX, burstY));
+      }
+    }
+
+    function loop(){
+      ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+      for(let i=confettiPieces.length-1;i>=0;i--){
+        const p = confettiPieces[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.2;
+        p.rot += p.rotSpeed;
+        p.life--;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size*0.6);
+        ctx.restore();
+        if (p.y > confettiCanvas.height + 60 || p.life <= 0) confettiPieces.splice(i,1);
+      }
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    let smallPulseTimer;
+    function startBigConfetti(){
+      spawnBurst(180);
+      let repeats = 0;
+      smallPulseTimer = setInterval(()=>{
+        spawnBurst(40);
+        repeats++;
+        if (repeats>8) clearInterval(smallPulseTimer);
+      }, 400);
+    }
+
+    // Copy page to clipboard as HTML (quick share).
+    document.getElementById('copyLink').addEventListener('click', async ()=>{
+      try{
+        const fullHtml = '<!doctype html>\\n' + document.documentElement.outerHTML;
+        await navigator.clipboard.writeText(fullHtml);
+        alert('HTML source copied to clipboard. Paste into a new file and save as penguin-countdown.html to share.');
+      }catch(e){
+        alert('Unable to copy automatically. You can right-click → Save as... or select all (Ctrl/Cmd+A) and copy the page source.');
+      }
+    });
+
+    // Accessibility: keyboard shortcut "D" triggers a quick burst (for Doggy)
+    addEventListener('keydown', (e)=>{
+      if (e.key.toLowerCase() === 'd'){
+        spawnBurst(30);
+      }
+    });
+
+    // small decorative floating emoji - using the new CSS animation
+    (function addFloaters(){
+      // LILY EMOJI ADDED HERE
+      const emojis = ['💗', '🐧', '✨', '🎈', '🤍', '🌸']; 
+      const n = 15; // Increased floaters for effect
+      const body = document.body;
+
+      for(let i=0;i<n;i++){
+        const el = document.createElement('div');
+        el.className = 'floater';
+        el.style.left = (Math.random()*100) + '%';
+        el.style.top = (100 + Math.random()*20) + 'vh';
+        el.style.fontSize = (16 + Math.random()*30) + 'px';
+        el.style.animationDuration = (12 + Math.random()*8) + 's';
+        el.style.animationDelay = (Math.random()*-15) + 's';
+        el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        body.appendChild(el);
+      }
+    })();
+  </script>
+</body>
+</html>
